@@ -5,8 +5,10 @@ using WebAPI.Data;
 using WebAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<WebAPIContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("WebAPIContext") ?? throw new InvalidOperationException("Connection string 'WebAPIContext' not found.")));
+builder.Services.AddDbContext<WebAPIContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WebAPIContext"));
+    options.UseLazyLoadingProxies();
+    });
 
 // Add services to the container.
 
